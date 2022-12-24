@@ -1,16 +1,16 @@
 const { config } = require("dotenv");
-const {Config, OpenAI, Configuration, OpenAIApi } = require("openai");
-const openAiConfig = new Configuration({
+const {Configuration, OpenAIApi } = require("openai");
+const OpenAIApiConFig = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(openAiConfig);
+const openai = new OpenAIApi(OpenAIApiConFig);
 
 const generateImage = async (req, res) => {
   try {
     const response = await openai.createImage({
-      prompt: "Zombie walking in an apocalyptic city.",
+      prompt: "A red haired man with beard and a crowbar in a photorealistic style.",
       n: 1,
-      size: '512x512',
+      size: '1024x1024',
     });
 
     const imageUrl = response.data.data[0].url;
