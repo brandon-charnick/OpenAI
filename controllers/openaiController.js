@@ -1,11 +1,11 @@
-const { config } = require("dotenv");
+const dotenv = require("dotenv").config();
 const {Configuration, OpenAIApi } = require("openai");
-const OpenAIApiConFig = new Configuration({
+const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
 });
-const openai = new OpenAIApi(OpenAIApiConFig);
+const openai = new OpenAIApi(configuration);
 
-const generateImage = async (req, res) => {
+const createImage = async (req, res) => {
   try {
     const response = await openai.createImage({
       prompt: "A red haired man with beard and a crowbar in a photorealistic style.",
@@ -22,7 +22,7 @@ const generateImage = async (req, res) => {
   } catch (error) {
     res.status(400).json({
       success: false,
-      error: 'Image could not be generated'
+      error: 'Image could not be created'
     });
 
     if (error.response) {
@@ -34,4 +34,4 @@ const generateImage = async (req, res) => {
   }
 };
 
-module.exports = { generateImage };
+module.exports = { createImage };
